@@ -222,14 +222,21 @@ def pass_change(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'author/pass_change.html', {'form': form})
 
-def user_logout(request):
-    logout(request)
-    return redirect('user_login')
+# def user_logout(request):
+#     logout(request)
+#     return redirect('user_login')
+
+class UserLogoutView(LogoutView):
+    next_page = reverse_lazy('login')
+
+    def dispatch(self, request, *args, **kwargs):
+        messages.success(self.request, 'Your Account has been Logged out Successfully !')
+        return super().dispatch(request, *args, **kwargs)
 
 # class based views 
-class UserLogoutView(LogoutView):
-    def get_success_url(self):
-        messages.success(self.request, 'Logged Out successfully')
-        return reverse_lazy('user_login')
+# class UserLogoutView(LogoutView):
+#     def get_success_url(self):
+#         messages.success(self.request, 'Logged Out successfully')
+#         return reverse_lazy('user_login')
 
 
