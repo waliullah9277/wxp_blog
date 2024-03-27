@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+
+<div class="container w-80 m-auto">
+  <h1>Welcome Your Profile {{ user.first_name }} {{ user.last_name }}</h1>
+  <div>
+    {% comment %} {{photo.prifile_picture.url}} {% endcomment %}
+  </div>
+  <a href="{% url 'edit_profile' %}" class="btn btn-success">Update Your Profile</a>
+  <br>
+  <a href="{% url 'favorite_list' %}" class="btn btn-warning text-white mt-2">Favorite Post List</a>
+  <br>
+  <a href="{% url 'create_author_profile' %}" class="btn btn-success text-white mt-2">Create Author Profile</a>
+</div>
+
+{% comment %} <div class="col-md-12 p-4 container w-80 m-auto">
+  <h5>All Categories</h5>
+  {{post.category.all}}
+  {% for cat in post.category.all %}
+  <a href="{% url 'category_wise_post' cat.slug %}" class="text-decoration-none text-white btn btn-success btn-sm" >{{cat.name}}</a>
+  {% endfor%}
+</div> {% endcomment %}
+
+<div class="row mt-4 container w-80 m-auto">
+  {% for post in data %}
+  <div class="col-sm-6 mb-sm-0">
+    <div class="card mb-3">
+      <div class="card-body">
+        <img src="{{post.image.url}}" class="card-img-top" alt="card image">
+        <h5 class="card-title"><a href="{% url 'details_post' post.id %}" class="text-decoration-none text-dark">{{post.title}}</a></h5>
+        <p class="card-text">{{post.content |truncatewords:10}}</p>
+        <p>Author: {{post.author.first_name}} {{post.author.last_name}}</p>
+        <p>
+          Category : {% for cat in post.category.all%}
+          <button class="btn btn-primary btn-sm m-2 disabled">
+            {{cat.name}}
+          </button>
+          {% endfor %}
+        </p>
+        <a href="{% url 'edit_post' post.id %}" class="btn btn-warning"
+          >Edit Post</a
+        >
+        <a href="{% url 'delete_post' post.id %}" class="btn btn-danger"
+          >Delete Post</a
+        >
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

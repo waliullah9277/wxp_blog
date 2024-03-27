@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% load static %} {% block content %} {% comment %}
+bannder section start here {% endcomment %}
+<div class="d-flex flex-wrap pt-3 align-items-center" style="width: 93%; margin: auto">
+  <div class="col-6">
+    <div >
+      <h2>Welcome to wXp Blog Programming</h2>
+      <p>
+        If you want to succeed as a developer, you need to immerse yourself in the coding culture. The programming field is so vast, and there is so much information to absorb that you’ll never get on top if you don’t keep involved enough in all the news and updates.
+        Here at PandaDoc, we strongly believe that learning is a key value. Even though we’re all experts in our respective fields, we always make time to expand our minds.
+      </p>
+    </div>
+  </div>
+  <div class="col-6">
+    <img src="{% static 'programming.jpg' %}" style="width: 550px; padding: 35px" />
+  </div>
+</div>
+{% comment %} bannder section end here {% endcomment %} 
+
+{% comment %} categories section start here {% endcomment %}
+<div class="d-flex flex-wrap p-4">
+  <div class="col-md-12 p-4">
+    <h5>All Categories</h5>
+    {% for cat in category %}
+    <a href="{% url 'category_wise_post' cat.slug %}" class="text-decoration-none text-white btn btn-success btn-sm" >{{cat.name}}</a>
+    {% endfor%}
+  </div>
+  <div class="col-md-12 px-3">
+    <h4>{{data | length}} results found</h4>
+    <div class="row mt-3">
+      {% for post in data %}
+      <div class="col-sm-6 mb-sm-0">
+        <div class="card mb-3">
+          <div class="card-body">
+            <img src="{{post.image.url}}" class="card-img-top" alt="card image">
+            {% comment %} <img src="{{ post.image.url}}" alt=""> {% endcomment %}
+            <h5 class="card-title"><a href="{% url 'details_post' post.id %}" class="text-decoration-none text-dark">{{post.title}}</a></h5>
+            <p class="card-text">{{post.content |truncatewords:10}}</p>
+            <p>Author: {{post.author.first_name}} {{post.author.last_name}}</p>
+            <p>
+              Category : {% for cat in post.category.all%}
+              <button class="btn btn-primary btn-sm m-2 disabled">
+                {{cat.name}}
+              </button>
+              {% endfor %}
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% comment %} categories section end here {% endcomment %} 
+{% endblock %}
