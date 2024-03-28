@@ -58,7 +58,7 @@ def register(request):
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             print('uid ', uid)
 
-            conform_link = f"http://127.0.0.1:8000/author/activate/{uid}/{token}"
+            conform_link = f"https://wxp-blog.onrender.com//author/activate/{uid}/{token}"
             # messages.success(request, 'Account Created Successfully')
 
             mail_subject = "Account Verification Mail"
