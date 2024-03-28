@@ -226,17 +226,17 @@ def pass_change(request):
 #     logout(request)
 #     return redirect('user_login')
 
-class UserLogoutView(LogoutView):
-    next_page = reverse_lazy('login')
+# class UserLogoutView(LogoutView):
+#     next_page = reverse_lazy('login')
 
-    def dispatch(self, request, *args, **kwargs):
-        messages.success(self.request, 'Your Account has been Logged out Successfully !')
-        return super().dispatch(request, *args, **kwargs)
+#     def dispatch(self, request, *args, **kwargs):
+#         messages.success(self.request, 'Your Account has been Logged out Successfully !')
+#         return super().dispatch(request, *args, **kwargs)
 
 # class based views 
-# class UserLogoutView(LogoutView):
-#     def get_success_url(self):
-#         messages.success(self.request, 'Logged Out successfully')
-#         return reverse_lazy('user_login')
+class UserLogoutView(LogoutView):
+    def get_success_url(self):
+        messages.success(self.request, 'Logged Out successfully')
+        return reverse_lazy('user_login')
 
 
