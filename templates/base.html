@@ -58,9 +58,9 @@
                 >
               </li>
               <li class="nav-item mx-2">
-                <form method = "post">
+                <form action="{% url 'user_logout' %}" method = "post">
                   {% csrf_token %}
-                  <a href="{% url 'user_logout' %}" type="submit" class="btn btn-danger text-white">Logout</a>
+                  <button type="submit" class="btn btn-danger text-white">Logout</button>
                 </form>
               </li>
               
