@@ -3,17 +3,22 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<form method="post" style="width: 30%; margin: auto; margin-top: 20px;margin-bottom:5px;" novalidate>
-    <h1>{{type}}</h1>
+<form method="post" style="width: 30%; margin: auto; margin-top: 20px; margin-bottom: 5px;" novalidate>
+    <h1>{{ type }}</h1>
     {% csrf_token %}
-    <!-- {{form | crispy }} -->
-    {% for fm in form%}
-      <div>{{fm.label_tag}} {{fm}} {{fm.errors|striptags}}</div> 
-    {% endfor%}
+    <!-- {{ form | crispy }} -->
+    {% for fm in form %}
+      <div>{{ fm.label_tag }} {{ fm }} {{ fm.errors|striptags }}</div>
+    {% endfor %}
     <br />
-    <p>Alreday have an acooutn,please <a href="{% url 'user_login' %}"><strong class="text-black">Login</strong></a> </p>
-    <button class="btn btn-primary" type="submit">{{type}}</button>
+    <p>
+        {% if type == "Login" %}
+            Don't have an account? Please <a href="{% url 'register' %}"><strong class="text-black">Register</strong></a>.
+        {% elif type == "Register" %}
+            Already have an account? Please <a href="{% url 'user_login' %}"><strong class="text-black">Login</strong></a>.
+        {% endif %}
+    </p>
+    <button class="btn btn-primary" type="submit">{{ type }}</button>
     <br />
-  </form>
-
+</form>
 {% endblock %}

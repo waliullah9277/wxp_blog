@@ -24,7 +24,9 @@ from .import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name = 'homepage'),
+    path('all-blogs/', views.home, name = 'all_blogs'),
     path('category/<slug:category_slug>/', views.home, name='category_wise_post'),
+    path('search-posts', views.search_posts, name = 'search_posts'),
     path('author/', include('author.urls')),
     path('category/', include('categories.urls')),
     path('post/', include('posts.urls')),

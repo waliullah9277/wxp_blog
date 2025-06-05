@@ -1,5 +1,9 @@
 {% extends "base.html" %} {% load static %} {% block content %} {% comment %}
 bannder section start here {% endcomment %}
+<form action="{% url 'search_posts'%}" class="d-flex container w-25 m-auto mt-4" method="GET">
+  <input type="search" class="form-control me-2" placeholder="Search Posts" aria-label="Search" name="q">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 <div class="d-flex flex-wrap pt-3 align-items-center" style="width: 93%; margin: auto">
   <div class="col-6">
     <div >
@@ -20,6 +24,7 @@ bannder section start here {% endcomment %}
 <div class="d-flex flex-wrap p-4">
   <div class="col-md-12 p-4">
     <h5>All Categories</h5>
+    <a href="{% url 'all_blogs' %}" class="btn btn-success btn-sm">All</a>
     {% for cat in category %}
     <a href="{% url 'category_wise_post' cat.slug %}" class="text-decoration-none text-white btn btn-success btn-sm" >{{cat.name}}</a>
     {% endfor%}
